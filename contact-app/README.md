@@ -76,5 +76,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   ```
 ### `run docker container 
 ```
-docker run {container id}
+docker run -p 3000:3000 {container id}
 ```
