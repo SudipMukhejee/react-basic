@@ -72,9 +72,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### `docker build`
  ``` 
- docker build .
+ docker build -t contact-app:01.
   ```
 ### `run docker container 
 ```
-docker run -d -p 3000:3000 {container id}
+docker run -d --rm --name "contact-app" -p 3000:3000 {container id}
+```
+### docker all container 
+```
+docker ps -a
+```
+## remove image 
+```
+docker rmi contact-app:01
+```
+### if you want to use docker whare there is requirded taking input
+```
+docker run -it {container id}
 ```
