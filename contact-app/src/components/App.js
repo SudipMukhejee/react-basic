@@ -38,11 +38,14 @@ function App() {
           <Route
             path="/"
             exact
-            route ={(props)=> 
-            (<ContactList {...props} contacts={contacts} getContactId={removeContactHandler} />)}
+            route={(props) => (
+              <ContactList
+                {...props}
+                contacts={contacts}
+                getContactId={removeContactHandler}
+              />
+            )}
           />
-          
-          
 
           <Route
             path="/add"
