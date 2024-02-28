@@ -1,16 +1,17 @@
-import React, {useState,useEffect} from 'react';
-import './App.css';
-import {uuid} from 'uuidv4';
- import Header from './Heder';
-import ContactList from './ContactList';
-import AddContact from './AddContact';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
+import { uuid } from "uuidv4";
+import Header from "./Heder";
+import ContactList from "./ContactList";
+import AddContact from "./AddContact";
 
 function App() {
   const [contacts, setContacts] = useState([]);
   const LOCAL_STORAGE_KEY = "contacts";
   const addContactHandler = (contact) => {
     console.log(contact);
-    setContacts([...contacts, {id: uuid() ,...contact}]);
+    setContacts([...contacts, { id: uuid(), ...contact }]);
   };
   const removeContactHandler = (id) => {
     const newContactList = contacts.filter((contact) => {
@@ -20,21 +21,25 @@ function App() {
   };
   useEffect(() => {
     console.log("useEffect");
-   
+
     const retriveContacts = JSON.parse(localStorage.getItem("contacts"));
-    if(retriveContacts) setContacts(retriveContacts);
+    if (retriveContacts) setContacts(retriveContacts);
   }, []);
   useEffect(() => {
     console.log("useEffect");
-   
+
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
   return (
-    <div className='ui container'>
-      <Header/>
-      <AddContact addContactHandler={addContactHandler }/>
-      <ContactList contacts={contacts} getContactId={removeContactHandler} />
-      </div>
+    <div className="ui container">
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/add" Component={AddContact}/>
+          <Route path="/" exact Component={ContactList}/>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
